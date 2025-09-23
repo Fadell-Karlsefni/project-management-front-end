@@ -5,9 +5,10 @@ import {
   ThemeProvider,
   Typography,
 } from '@mui/material';
-import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Link, RouterProvider } from 'react-router';
 
-import Table from './components/ui/table';
+import Pagination from './components/ui/Pagination';
+import Table from './components/ui/Table';
 
 const theme = createTheme({
   typography: {
@@ -24,30 +25,36 @@ const router = createBrowserRouter([
           columns={[
             {
               id: 'tugas',
-              label: 'tugas',
+              label: 'Tugas',
             },
             {
               id: 'status',
-              label: 'status',
+              label: 'Status',
             },
           ]}
           data={[
             {
               id: 1,
-              tugas: 'tugas 1',
-              status: 'baru',
+              tugas: 'Tugas 1',
+              status: 'Baru',
             },
             {
               id: 2,
-              tugas: 'tugas 2',
-              status: 'sedang di kerjakan',
+              tugas: 'Tugas 2',
+              status: 'Sedang dikerjakan',
             },
             {
               id: 3,
-              tugas: 'tugas 3',
-              status: 'selesai',
+              tugas: 'Tugas 3',
+              status: 'Selesai',
             },
           ]}
+        />
+        <Pagination
+          count={10}
+          onChange={(_, page) => {
+            console.log('page:', page);
+          }}
         />
       </Box>
     ),
@@ -57,7 +64,7 @@ const router = createBrowserRouter([
     element: (
       <Box>
         <Typography variant="h1">Login</Typography>
-        <Link to="/">Kembali ke Home</Link>
+        <Link to={'/'}>Kembali ke Home</Link>
       </Box>
     ),
   },
