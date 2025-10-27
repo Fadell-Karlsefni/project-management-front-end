@@ -1,6 +1,7 @@
 import { Settings } from '@mui/icons-material';
 import { Stack } from '@mui/material';
 
+import Avatar from '../../../ui/Avatar';
 import Dropdown from '../../../ui/Dropdown';
 
 const DetailProject = () => {
@@ -12,20 +13,28 @@ const DetailProject = () => {
       }}
       justifyContent={'center'}
       alignItems={'center'}
+      direction={'row'}
+      spacing={2}
     >
+      <Avatar
+        text={'Muhammad Fadillah'}
+        onClick={() => {
+          console.log('handle click avatar');
+        }}
+      />
       <Dropdown
         icon={<Settings />}
         options={[
           {
-            label: 'Tutup Proyek Ini',
+            label: 'Tutup proyek ini',
             onClick: () => {
-              console.log('Handle Close Project');
+              console.log('handle close project');
             },
           },
           {
-            label: 'Ubah Deadline Proyek',
+            label: 'Ubah deadline',
             onClick: () => {
-              console.log('Handle Update Deadline Project');
+              console.log('handle update deadline project');
             },
           },
         ]}
@@ -33,4 +42,5 @@ const DetailProject = () => {
     </Stack>
   );
 };
+
 export default DetailProject;
