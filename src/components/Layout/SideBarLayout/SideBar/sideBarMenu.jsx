@@ -5,7 +5,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 const SidebarMenu = () => {
   const navigate = useNavigate();

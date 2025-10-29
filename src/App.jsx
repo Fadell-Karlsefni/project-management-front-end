@@ -1,11 +1,12 @@
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { createBrowserRouter, RouterProvider } from 'react-router';
-
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'; // gunakan react-router-dom!
 import Login from './components/pages/auth/login';
 import Dashboard from './components/pages/dashboard';
 import DetailProject from './components/pages/Projects/DetailProject';
+import SideBarLayout from '@/components/Layout/SideBarLayout'; 
+import Project from './components/pages/Projects/project';
 
 const theme = createTheme({
   typography: {
@@ -16,15 +17,25 @@ const theme = createTheme({
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Dashboard />,
+    element: <SideBarLayout />, 
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: 'projects',
+        element: <Project />,
+      },
+      {
+        path: 'projects/:id',
+        element: <DetailProject />,
+      },
+    ],
   },
   {
     path: '/login',
     element: <Login />,
-  },
-  {
-    path: '/projects/:id',
-    element: <DetailProject />,
   },
 ]);
 
