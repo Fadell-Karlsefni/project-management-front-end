@@ -1,5 +1,6 @@
 import { Box, Breadcrumbs, Link, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import { Outlet } from 'react-router-dom';
 
 import Navbar from './Navbar';
 import Sidebar from './SideBar';
@@ -21,18 +22,15 @@ const SidebarLayout = ({ children, pageTitle = '', breadcrumbs = [] }) => {
           key={index}
           underline="hover"
           color="inherit"
-          sx={{
-            cursor: 'pointer',
-          }}
-          onClick={() => {
-            navigate(breadcrumb.href);
-          }}
+          sx={{ cursor: 'pointer' }}
+          onClick={() => navigate(breadcrumb.href)}
         >
           {breadcrumb.label}
         </Link>
       );
     });
   };
+
   return (
     <>
       <Navbar />
@@ -55,6 +53,7 @@ const SidebarLayout = ({ children, pageTitle = '', breadcrumbs = [] }) => {
           </Link>
           {renderBreadcrumbs()}
         </Breadcrumbs>
+
         {pageTitle && (
           <Box>
             <Typography variant="h4" sx={{ mb: 2 }}>
@@ -62,7 +61,8 @@ const SidebarLayout = ({ children, pageTitle = '', breadcrumbs = [] }) => {
             </Typography>
           </Box>
         )}
-        {children}
+
+        {children ? children : <Outlet />}
       </Box>
     </>
   );

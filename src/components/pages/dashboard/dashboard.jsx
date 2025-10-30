@@ -1,18 +1,19 @@
 import { colors, Paper, Typography } from '@mui/material';
-import { useState } from 'react';
 
 import SideBarLayout from '@/components/Layout/SideBarLayout';
 
 const Dashboard = () => {
   return (
-  <SideBarLayout pageTitle='Dashboard'>
-    <Paper sx={{
-      padding: 2,
-      background: colors.lightBlue[100],
-    }}>
-      <Typography>Menamilkan Dashboard Di sini</Typography>
-    </Paper>
-  </SideBarLayout>
+    <SideBarLayout pageTitle="Dashboard">
+      <Paper
+        sx={{
+          padding: 2,
+          background: colors.lightBlue[100],
+        }}
+      >
+        <Typography>Menamilkan Dashboard Di sini</Typography>
+      </Paper>
+    </SideBarLayout>
   );
 };
 

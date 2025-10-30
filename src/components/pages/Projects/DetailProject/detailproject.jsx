@@ -1,10 +1,11 @@
 import { colors, Paper, Typography } from '@mui/material';
+
 import SideBarLayout from '@/components/Layout/SideBarLayout';
 
 const DetailProject = () => {
   return (
-    <SideBarLayout 
-      pageTitle='Detail Project'
+    <SideBarLayout
+      pageTitle="Detail Project"
       breadcrumbs={[
         {
           label: 'Projects',
@@ -12,17 +13,19 @@ const DetailProject = () => {
         },
         {
           label: 'Agency Software Engineering',
-        }
-      ]}>
-        <Paper 
+        },
+      ]}
+    >
+      <Paper
         sx={{
           padding: 2,
           background: colors.lightBlue[100],
-        }}>
-          <Typography>Menampilkan Detail Project di sini</Typography>
-        </Paper>
+        }}
+      >
+        <Typography>Menampilkan Detail Project di sini</Typography>
+      </Paper>
     </SideBarLayout>
-  )
+  );
 };
 
 export default DetailProject;
