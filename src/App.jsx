@@ -3,6 +3,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import authLoader from './components/Layout/AuthLayout/authLayoutLoader';
+import sidebarLoader from './components/Layout/SideBarLayout/sideBarLayoutLoader';
 import Login from './components/pages/auth/login';
 import Dashboard from './components/pages/dashboard';
 import DetailProject from './components/pages/Projects/DetailProject';
@@ -17,24 +19,23 @@ const theme = createTheme({
 const router = createBrowserRouter([
   {
     path: '/',
-    children: [
-      {
-        index: true,
-        element: <Dashboard />,
-      },
-      {
-        path: 'projects',
-        element: <Project />,
-      },
-      {
-        path: 'projects/:id',
-        element: <DetailProject />,
-      },
-    ],
+    loader: sidebarLoader,
+    element: <Dashboard />,
   },
   {
     path: '/login',
+    loader: authLoader,
     element: <Login />,
+  },
+  {
+    path: '/projects',
+    loader: sidebarLoader,
+    element: <Project />,
+  },
+  {
+    path: '/projects/:id',
+    loader: sidebarLoader,
+    element: <DetailProject />,
   },
 ]);
 
