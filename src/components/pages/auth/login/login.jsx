@@ -1,12 +1,12 @@
 import { Button, Paper, Stack, Typography } from '@mui/material';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 
 import AuthLayout from '@/components/Layout/AuthLayout';
 import TextField from '@/components/ui/Forms/TextField';
-import session from '@/utils/session';
-import { useState } from 'react';
 import services from '@/services';
+import session from '@/utils/session';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -18,12 +18,14 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await services.auth.login(fromValues);
-      session.setSession(response.data.access_token) // response.data
+      session.setSession(
+        response.data.access_token || response.data?.data?.access_token,
+      ); // response.data
       navigate('/');
     } catch (error) {
-      console.error("Login Gagal", error);
+      console.error('Login Gagal', error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
