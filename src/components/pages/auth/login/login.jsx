@@ -5,16 +5,26 @@ import { useNavigate } from 'react-router';
 import AuthLayout from '@/components/Layout/AuthLayout';
 import TextField from '@/components/ui/Forms/TextField';
 import session from '@/utils/session';
+import { useState } from 'react';
+import services from '@/services';
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const { control, handleSubmit } = useForm();
 
-  const onSubmit = (fromValues) => {
-    console.log('Login Data:', fromValues);
-    session.setSession('dummy-token');
-    navigate('/');
+  const onSubmit = async (fromValues) => {
+    setLoading(true);
+    try {
+      const response = await services.auth.login(fromValues);
+      session.setSession(response.data.access_token) // response.data
+      navigate('/');
+    } catch (error) {
+      console.error("Login Gagal", error);
+    } finally {
+      setLoading(false)
+    }
   };
 
   return (
