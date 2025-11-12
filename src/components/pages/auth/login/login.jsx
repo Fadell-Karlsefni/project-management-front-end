@@ -8,25 +8,29 @@ import TextField from '@/components/ui/Forms/TextField';
 import services from '@/services';
 import session from '@/utils/session';
 
+import * as Yup from 'yup'
+import {yupResolver} from '@hookform/resolvers/yup'
+
+const loginFormSchema = Yup.object({
+  email: Yup.string().email().required(),
+  password: Yup.string().required(),
+});
+
 const Login = () => {
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm({
+    resolver: yupResolver(loginFormSchema),
+  });
 
-  const onSubmit = async (fromValues) => {
+  const onSubmit = async (formValues) => {
     setLoading(true);
-    try {
-      const response = await services.auth.login(fromValues);
-      session.setSession(
-        response.data.access_token || response.data?.data?.access_token,
-      ); // response.data
-      navigate('/');
-    } catch (error) {
-      console.error('Login Gagal', error);
-    } finally {
-      setLoading(false);
-    }
+    const response = await services.auth.login(formValues);
+    session.setSession(response.data.data.access_token);
+    setLoading(false);
+    navigate('/');
   };
 
   return (
@@ -51,10 +55,15 @@ const Login = () => {
           component={'form'}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <TextField label={'Email'} control={control} name={'email'} />
-          <TextField label={'Password'} control={control} name={'password'} />
-          <Button type="submit" variant="contained" fullWidth>
-            Masuk Ke Akun Anda
+          <TextField label={'Email'} control={control} name="email" />
+          <TextField
+            label={'Password'}
+            control={control}
+            name="password"
+            secureText
+          />
+          <Button type="submit" variant="contained" loading={loading} fullWidth>
+            Masuk ke akun Anda
           </Button>
           <Button
             type="button"
@@ -62,7 +71,7 @@ const Login = () => {
             onClick={() => navigate('/signup')}
             fullWidth
           >
-            Daftar Baru
+            Daftar baru
           </Button>
         </Stack>
       </Paper>
