@@ -19,12 +19,11 @@ const TextField = ({
   id,
   ...props
 }) => {
-
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    setShowPassword(secureText)
-  }, [secureText])
+    setShowPassword(secureText);
+  }, [secureText]);
 
   return (
     <Controller

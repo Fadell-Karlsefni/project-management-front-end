@@ -8,8 +8,8 @@ import TextField from '@/components/ui/Forms/TextField';
 import services from '@/services';
 import session from '@/utils/session';
 
-import * as Yup from 'yup'
-import {yupResolver} from '@hookform/resolvers/yup'
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const loginFormSchema = Yup.object({
   email: Yup.string().email().required(),
